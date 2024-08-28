@@ -238,6 +238,10 @@ ELEMENT FOCUS WHEN CLICKED
 	font-size: 1.3em;
 }
 
+#elementFocus .move_sync .move_basics {
+	background-image: var(--bgDivineMove);
+}
+
 #elementFocus .move_dynamax {
 	background: var(--maxmove) !important;
 	color: #AAA;
@@ -326,6 +330,18 @@ ELEMENT FOCUS WHEN CLICKED
 
 #elementFocus .skill_passiveMaster .skill_name {
 	background-image: var(--iconPassiveMaster);
+	background-repeat: no-repeat;
+	background-size: 24px;
+}
+
+#elementFocus .skill_passiveArcSuit {
+	background-color: var(--passive_arcsuit);
+	background-image: var(--bgPassiveArcsuit);
+	background-size: cover;
+}
+
+#elementFocus .skill_passiveArcSuit .skill_name {
+	background-image: var(--iconPassiveArcsuit);
 	background-repeat: no-repeat;
 	background-size: 24px;
 }

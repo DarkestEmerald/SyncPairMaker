@@ -13,6 +13,7 @@ import {CURRENT_SYNCGRID, SYNCGRIDS, SYNCGRIDS_TEMPLATES} from './syncgrids.js';
 const MAX_NUMBER_STARS = 7;
 const MAX_NUMBER_PASSIVES = 3;
 const MAX_NUMBER_MASTERPASSIVES = 2;
+const MAX_NUMBER_ARCSUITPASSIVES = 2;
 const MAX_NUMBER_LUCKY = 3;
 const MAX_NUMBER_THEME = 6;
 const MAX_NUMBER_MOVES = 4;
@@ -142,6 +143,12 @@ function showSyncPair2() {
 		g("iconTabPassiveMaster").classList.remove("hide");
 	}
 
+	if(SYNCPAIR.skills.passivesArcSuit.length > 0) {
+		g("passivesArcSuit").innerHTML = skillsAre(SYNCPAIR.skills.passivesArcSuit, "skill_passiveArcSuit");
+		g("passivesArcSuit").classList.remove("hide");
+		g("iconTabPassiveArcSuit").classList.remove("hide");
+	}
+
 	if(SYNCPAIR.skills.passives2.length > 0) {
 		g("passives2").innerHTML = skillsAre(SYNCPAIR.skills.passives2, "skill_passive");
 		g("btn_alter").classList.remove("hide");
@@ -190,6 +197,7 @@ function resetShowSyncPair() {
 	g("moves2Sync").innerHTML = "";
 
 	g("passiveMaster").innerHTML = "";
+	g("passivesArcSuit").innerHTML = "";
 	g("passives").innerHTML = "";
 	g("passives2").innerHTML = "";
 
@@ -236,7 +244,9 @@ function resetShowSyncPair() {
 	g("btn_dynamax").classList.add("hideMax");
 
 	g("iconTabPassiveMaster").classList.add("hide");
+	g("iconTabPassiveArcSuit").classList.add("hide");
 	g("passiveMaster").classList.add("hide");
+	g("passivesArcSuit").classList.add("hide");
 	g("passives").classList.remove("hide");
 	g("passives2").classList.add("hide");
 
@@ -460,6 +470,7 @@ function moveIs(move, option) {
 	if(move.name == "" || move.type == "") { moveOption = "no_move"; }
 
 	var b_move = "";
+	var divine_move = "";
 	var move_name = move.name;
 	var noIconType = "";
 	if(move_name.substring(0, 8).toLowerCase() == "(b move)") {
@@ -468,12 +479,17 @@ function moveIs(move, option) {
 		noIconType = "noIconType"
 	}
 
+	if(move_name.substring(0, 13).toLowerCase() == "(divine move)") {
+		divine_move = `move_divine`;
+		move_name = move.name.substring(13);
+	}
+
 	var target_icon = "";
 	if(move.target == "All opponents") {
 		target_icon = `<div class="move_target_icon bg_${move.type.toLowerCase()}"></div>`
 	}
 
-	return `<div class="move ${moveOption} bg_${move.type.toLowerCase()} elementF">
+	return `<div class="move ${moveOption} bg_${move.type.toLowerCase()} ${divine_move} elementF">
 				<div class="move_basics icon_${move.type.toLowerCase()} ${noIconType}">
 					${b_move}
 					<p class="move_name">${move_name}</p>
@@ -548,6 +564,7 @@ function moveIs(move, option) {
 			case "+tech": exDesc = "Power ×1.5"; break;
 			case "+support": exDesc = "Once per battle, the stat increase after using sync move is doubled."; break;
 			case "+sprint": exDesc = "The first time the user's sync move is used each battle, the sync move countdown is reduced by three."; break;
+			case "+multi": exDesc = "Lowers the opponent's Type Rebuff of a particular type the first time the user's Sync move is used each battle."; break;
 			default:
 				if(p1.substring(0,7)=="+field ") {
 					var setField = p1.match(/(\+field)(.*)/)[2].split(",");
@@ -660,6 +677,7 @@ function skillsAre(skills, option) {
 
 	/*limits the number of skill*/
 	if(option == "skill_passiveMaster") { skills3 = skills.slice(0, MAX_NUMBER_MASTERPASSIVES) }
+	if(option == "skill_passiveArcSuit") { skills3 = skills.slice(0, MAX_NUMBER_ARCSUITPASSIVES) }
 	if(option == "skill_lucky") { skills3 = skills.slice(0, MAX_NUMBER_LUCKY) }
 	if(option == "skill_theme") { skills3 = skills.slice(0, MAX_NUMBER_THEME) }
 
@@ -1312,7 +1330,7 @@ g("btn_help").addEventListener("click", function() {
 		`<span>id</span><br>the id of the cell...<br><br>
 		<span>x, y</span><br>coordinates of the cell in the grid. You can make a completely new template if you want. For more details, look at the "All cells" template.<br><br>
 		<span>energy, orb, level</span><br>(optional but if you really want to fully interact with your grid, you can add those values)<br><br>
-		<span>color</span><br>"blue", "red", "green", "yellow", "sync", "dynamax"<br><br>
+		<span>color</span><br>"blue", "red", "green", "yellow", "sync", "dynamax", "divine"<br><br>
 		<span>icon</span><br>"bug", "dark", "dragon", "electric", "fairy", "fighting", "fire", "flying", "ghost", "grass", "ground", "ice", "normal", "poison", "psychic", "rock", "steel", "water",<br><br>"trainer", "sync", "dynamax", "stat", "passive"`;
 
 	g("detailedCell").children[4].innerHTML = "0";
