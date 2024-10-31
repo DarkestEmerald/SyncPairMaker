@@ -699,7 +699,7 @@ SKILLS
 }
 
 
-#passiveMaster, #passivesArcSuit, #passives, #passives2 {
+#passiveMaster, #passivesArcSuit, #passivesSuperawakening, #passives, #passives2 {
 	display: flex;
 	flex-direction: column;
 }
@@ -726,6 +726,18 @@ SKILLS
 
 #passivesArcSuit .skill_name {
 	background-image: var(--iconPassiveArcsuit);
+	background-repeat: no-repeat;
+	background-size: 24px;
+}
+
+#passivesSuperawakening .skill {
+	background-color: var(--passive_superawakening);
+	background-image: var(--bgPassiveSuperawakening);
+	background-size: cover;
+}
+
+#passivesSuperawakening .skill_name {
+	background-image: var(--iconPassiveSuperawakening);
 	background-repeat: no-repeat;
 	background-size: 24px;
 }
@@ -826,7 +838,11 @@ img[src^="./images/bg/"] {
 
 
 #syncPair_trainerImageBase[src*="v2.48.0"],
-#syncPair_trainerImageEx[src*="v2.48.0"] {
+#syncPair_trainerImageEx[src*="v2.48.0"],
+#syncPair_trainerImageBase[src*="v2.49.0"],
+#syncPair_trainerImageEx[src*="v2.49.0"],
+#syncPair_trainerImageBase[src*="v2.5"],
+#syncPair_trainerImageEx[src*="v2.5"] {
     width: 690px;
     height: auto;
     top: -156px;
