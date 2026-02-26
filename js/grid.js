@@ -1,9 +1,4 @@
 export function cellPropertiesBasedOn(divContainer) {
-	/*
-	var container_width = Math.floor(parseInt(divContainer.offsetWidth));
-	var container_height = Math.floor(parseInt(divContainer.offsetHeight));
-	*/
-
 	/* Don't depend on the divContainer in this case,
 	because there are two div size with game mode and expand mode*/
 	var container_width = 768;
@@ -16,9 +11,9 @@ export function cellPropertiesBasedOn(divContainer) {
 	var cell_margin_top = container_height/2 - cell_height/2;
 
 	return {
-		"width" : cell_width,
+		"width" : cell_width+2,
 		"ratio" : cell_ratio,
-		"height" : cell_height,
+		"height" : cell_height+2,
 		"marginLeft" : cell_margin_left,
 		"marginTop" : cell_margin_top
 	}
@@ -29,6 +24,7 @@ export function genGrid(sgrid) {
 	var gridDiv = document.getElementById("cells");
 
 	if(sgrid.length > 100) { gridDiv.classList.add("academyCells"); } else { gridDiv.classList.remove("academyCells"); }
+	if(sgrid.length == 90) { gridDiv.classList.add("red1996Cells"); } else { gridDiv.classList.remove("red1996Cells"); }
 
 	var cellProperties = cellPropertiesBasedOn(gridDiv);
 
